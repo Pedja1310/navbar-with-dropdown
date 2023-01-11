@@ -1,97 +1,201 @@
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
+  /* colors */
+  --light-color: hsl(0, 0%, 98%);
+  --medium-color: hsl(0, 0%, 41%);
+  --dark-color: hsl(0, 0%, 8%);
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+  --mobile-width: 375px;
+  --desktop-width: 1440px;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
+/* https://piccalil.li/blog/a-modern-css-reset */
 
-body {
+* {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  padding: 0;
+  font: inherit;
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/* Set core body defaults */
+body {
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  font-family: "Epilogue";
+  background-color: var(--light-color);
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.wrapper {
+  max-width: var(--desktop-width);
+  margin: 0 auto;
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  color: var(--dark-color);
 }
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+header {
+  display: flex;
+  align-items: center;
+  padding: 1.7rem 0;
+}
+
+header nav {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #f7df1eaa);
+  margin-right: 5rem;
 }
 
-.card {
-  padding: 2em;
+header nav ul li {
+  list-style: none;
 }
 
-.read-the-docs {
-  color: #888;
+header nav ul li a {
+  text-decoration: none;
+  color: var(--medium-color);
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+header nav ul li a:hover {
+  color: var(--dark-color);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.navigation-links > ul {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.auth-links ul {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.dropdown-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dropdown-btn img {
+  height: 0.5rem;
+}
+
+.register-btn {
+  border: 1px solid var(--medium-color);
+  padding: 0.8rem 1rem;
+  border-radius: 0.9rem;
+}
+
+.register-btn:hover {
+  border: 1px solid var(--dark-color);
+  padding: 0.8rem 1rem;
+  border-radius: 0.9rem;
+}
+
+/* dropdown menus */
+
+.dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.dropdown {
+  position: absolute;
+  background-color: white;
+  min-width: 10rem;
+  border-radius: 0.5rem;
+  /* visibility: hidden; */
+  z-index: 99;
+  -webkit-box-shadow: 1px 9px 45px -16px rgba(0, 0, 0, 0.66);
+  -moz-box-shadow: 1px 9px 45px -16px rgba(0, 0, 0, 0.66);
+  box-shadow: 1px 9px 45px -16px rgba(0, 0, 0, 0.66);
+}
+
+.dropdown.left {
+  min-width: 10rem;
+  right: 0;
+  top: 2.5rem;
+}
+
+.dropdown.right {
+  min-width: 8rem;
+  left: 0;
+  top: 2.5rem;
+}
+
+.dropdown ul {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  margin: 1rem 1.5rem;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 2rem;
+  width: 100%;
+}
+
+.dropdown-item img {
+  margin-right: 1rem;
 }
